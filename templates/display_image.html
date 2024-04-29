@@ -37,29 +37,21 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        function checkForProcessedImage(filename) {
-            var processedImageUrl = "{{ url_for('processed_file', filename='') }}" + filename;
-            $.get(processedImageUrl)
-                .done(function() {
-                    document.getElementById('processed-image').src = processedImageUrl;
-                    document.getElementById('status-message').innerHTML = "Processing complete.";
-                    $('.loader').hide();
-                    $('#download-button').attr('href', processedImageUrl).show(); // Show and set the download link
-                })
-                .fail(function() {
-                    setTimeout(function() { checkForProcessedImage(filename); }, 15000);
-                });
+        function pollProcessedImage(filename) {
+            $.getJSON('/poll_processed/' + filename, function(data) {
+                var processedImageUrl = "{{ url_for('processed_file', filename='') }}" + filename.split('.')[0] + '/' + data.filename;
+                document.getElementById('processed-image').src = processedImageUrl;
+                document.getElementById('status-message').innerHTML = "Processing complete.";
+                $('.loader').hide();
+                $('#download-button').attr('href', processedImageUrl).show();
+            });
         }
 
         $(document).ready(function() {
-            $.getJSON('/next-filename')
-                .done(function(data) {
-                    checkForProcessedImage(data.next_filename);
-                    $('.loader').show();
-                })
-                .fail(function() {
-                    document.getElementById('status-message').innerHTML = "Failed to retrieve the next expected filename.";
-                });
+            var filename = "{{ filename }}";
+            pollProcessedImage(filename);
+            $('.loader').show();
+            console.log('Polling for processed image...');
         });
     </script>
 </head>
@@ -73,9 +65,8 @@
             </div>
             <div class="col-md-6 text-center mb-3">
                 <h2>Processed Image</h2>
-                <p id="status-message">Waiting for the image to process...</p>
-                <img id="processed-image" class="img-fluid" alt="Processed Image will appear here once available.">
-                <!-- Download button directly below the processed image -->
+                <p id="status-message">Processing image...</p>
+                <img id="processed-image" class="img-fluid" alt="Processed Image">
                 <div class="mt-3">
                     <a href="#" id="download-button" class="btn btn-primary btn-lg" download style="display:none;">Download Processed Image</a>
                 </div>
