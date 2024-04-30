@@ -5,10 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Upload Image - Barbify Me</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         body {
             background-color: #f8d7da; /* Light pink background */
+            font-family: 'Comfortaa', cursive; /* Default font for the page */
+        }
+        .header-image {
+            width: 50%; /* Adjusted width to half the size */
+            height: auto;
+            display: block;
+            margin: 0 auto; /* Center the image horizontally */
         }
         .loader {
             border: 16px solid #f3f3f3;
@@ -27,6 +37,19 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .info-box {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            font-family: 'Sacramento', cursive; /* Styling the button font */
+            font-size: 80px; /* Increased font size */
+            font-weight: bold; /* Added font weight */
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -44,12 +67,21 @@
 </head>
 <body>
     <div class="container mt-5">
+        <!-- Placeholder for header image, replace '#' with your actual image URL -->
+        <img src="static/images/Barbify.png" class="header-image" alt="Header Image">
         <h1 class="text-center mb-4" style="font-size: 2.5rem; color: #d63384;">Barbify Me!</h1>
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <div class="info-box">
+                    Please use clear images of yourself or another person for best results.<br>
+                    <br>
+                    Processing time can vary from 1-3 minutes, please be patient! <br>
+                    <br>
+                    Beta Version, results may vary. Please send all feedback to pocketens@gmail.com
+                </div>
                 <form action="/upload" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
-                        <label for="file" class="form-label">Upload an Imag</label>
+                        <label for="file" class="form-label">Upload an Image</label>
                         <input type="file" class="form-control" name="file" id="file" required>
                     </div>
                     <div class="d-grid">

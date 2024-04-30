@@ -31,7 +31,7 @@
   },
   "4": {
     "inputs": {
-      "ckpt_name": "dreamshaperXL_v21TurboDPMSDE.safetensors"
+      "ckpt_name": "sd_xl_1.0.safetensors"
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
@@ -40,7 +40,7 @@
   },
   "6": {
     "inputs": {
-      "text": "a barbie doll, photorealistic, 35mm",
+      "text": "a barbie doll, photography, tilt shift, macro,  35mm",
       "clip": [
         "4",
         1
@@ -53,7 +53,7 @@
   },
   "7": {
     "inputs": {
-      "text": "blurry, illustration, distorted, horror, bad hands bad face, bad eyes, extra fingers, more than 10 fingers, crossed eyes, ",
+      "text": "blurry, illustration, distorted, horror, nudity, bare breasts,  bad hands bad face, bad eyes, extra fingers, more than 10 fingers, crossed eyes, ",
       "clip": [
         "4",
         1
@@ -249,7 +249,7 @@
   },
   "37": {
     "inputs": {
-      "resolution": "1024 x 1024 (1.00)",
+      "resolution": "960 x 1088 (0.88)",
       "batch_size": 1
     },
     "class_type": "SDXL Empty Latent Image",
